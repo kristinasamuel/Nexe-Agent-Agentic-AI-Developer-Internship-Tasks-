@@ -1,3 +1,4 @@
+import re
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
@@ -8,6 +9,15 @@ from agents.memory import SQLiteSession
 from my_agents.agents import Math_Agent
 
 app = FastAPI()
+
+def clean_output_text(text: str) -> str:
+    # 1. Remove all literal dollar signs
+    text = text.replace("$", "")
+    # 2. Remove LaTeX delimiters: \(, \), \[, \], \$, \\$, etc.
+    text = re.sub(r'\\\(|\\\)|\\\[|\\\]|\\\$', '', text)
+    # 3. Final safety sweep for any remaining single backslashes that look like math starts
+    text = re.sub(r'\\[a-zA-Z]+', '', text) 
+    return text
 
 # Explicit CORS for local development
 app.add_middleware(
@@ -33,12 +43,17 @@ async def chat(user_prompt: UserPrompt):
             session=session
         )
         
+        # Fail-safe: Clean up any dollar signs or LaTeX-style delimiters that might slip through
+        clean_output = clean_output_text(response.final_output)
+        
         return {
-            "response": response.final_output,
+            "response": clean_output,
             "technical_logic": {
-                "agent_name": Math_Agent.name,
-                "steps": [turn.model_dump() for turn in response.turns] if hasattr(response, 'turns') else "Standard logic execution",
-                "model": "gemini-flash-latest"
+                "ai_response": {
+                    "content": clean_output,
+                    "format": "text",
+                    "status": "completed"
+                }
             }
         }
     except Exception as e:

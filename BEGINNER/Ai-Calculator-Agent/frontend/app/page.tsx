@@ -57,13 +57,12 @@ export default function Home() {
     setIsLoading(true);
 
     try {
-      // Fetch from 127.0.0.1 to avoid localhost vs 127.0.0.1 mismatch
-      const res = await fetch("http://127.0.0.1:8000/chat", {
+      // Fetch from Hugging Face Space
+      const res = await fetch("https://kristinasamuel-ai-calculator-agent.hf.space/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: trimmedInput }),
       });
-
       if (!res.ok) throw new Error("CORS or Connection Error");
 
       const data = await res.json();
@@ -77,7 +76,7 @@ export default function Home() {
     } catch (err) {
       setMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: "Engine offline. Please verify calculator backend on port 8000 and CORS settings." 
+        content: "Engine offline. Please verify the backend connection or CORS settings." 
       }]);
     } finally {
       setIsLoading(false);
@@ -118,7 +117,10 @@ export default function Home() {
                 <IoSparklesOutline className="w-12 h-12 text-emerald-500/20 relative z-10 animate-pulse" />
               </div>
               <div className="space-y-4">
-                <p className="text-xl font-bold text-slate-100 uppercase tracking-widest italic">Ready for calculation.</p>
+                <p className="text-xl font-bold text-slate-100 uppercase tracking-widest italic text-center">Hello! I am your AI Calculator.</p>
+                <p className="text-sm text-slate-400 text-center max-w-md mx-auto">
+                  I'm specialized in solving mathematical problems. I can help you with arithmetic, algebra, and more. Ask me anything about math!
+                </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-w-md mx-auto">
                   <button onClick={() => setInput("Solve quadratic equation x² + 5x + 6 = 0")} className="p-3 text-left rounded-xl border border-slate-800 bg-slate-900/40 hover:border-emerald-500/40 transition-all flex items-center gap-3">
                     <IoStatsChartOutline className="text-emerald-500 w-3.5 h-3.5" />
@@ -176,13 +178,13 @@ export default function Home() {
                           className="flex items-center gap-2 text-[9px] font-black text-emerald-500/70 hover:text-emerald-400 transition-colors uppercase tracking-widest"
                         >
                           <IoTerminalOutline className="w-3 h-3" />
-                          {msg.showLogic ? "Obfuscate Technical Logic" : "Inspect Compute Logic"}
+                          {msg.showLogic ? "Hide JSON Response" : "View JSON Response"}
                         </button>
                         
                         {msg.showLogic && (
                           <div className="mt-2 animate-in fade-in zoom-in-95 duration-200">
                             <div className="p-3 bg-black/40 rounded-lg border border-emerald-500/10">
-                               <p className="text-[9px] font-bold text-slate-500 mb-2 uppercase tracking-tighter">System Engine Trace:</p>
+                               <p className="text-[9px] font-bold text-slate-500 mb-2 uppercase tracking-tighter">Raw JSON Response:</p>
                                <pre className="text-[10px] overflow-x-auto font-mono text-emerald-400/90 custom-scrollbar whitespace-pre-wrap leading-tight">
                                 {JSON.stringify(msg.logic, null, 2)}
                               </pre>
@@ -246,7 +248,7 @@ export default function Home() {
              <div className="flex items-center gap-1.5 text-slate-600">
                 <IoSettingsOutline className="w-2.5 h-2.5" />
                 <p className="text-[9px] font-bold uppercase tracking-[0.15em]">
-                  CALC-ENGINE V1.0.4 • 127.0.0.1:8000
+                  CALC-ENGINE V1.0.4 • HF-SPACE
                 </p>
              </div>
              <div className="group flex items-center gap-1.5 py-0.5 px-3 rounded-full bg-emerald-500/5 border border-emerald-500/10 hover:bg-emerald-500/10 transition-all cursor-default">
