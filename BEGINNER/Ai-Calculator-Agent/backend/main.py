@@ -22,7 +22,7 @@ def clean_output_text(text: str) -> str:
 # Explicit CORS for local development
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:3001"],
+    allow_origins=["http://localhost:3000", "http://localhost:3001","https://nexe-agent-agentic-ai-developer-int.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
