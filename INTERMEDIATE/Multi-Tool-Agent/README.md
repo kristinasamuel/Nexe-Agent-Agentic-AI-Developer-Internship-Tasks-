@@ -12,7 +12,7 @@ The primary goal of this project is to demonstrate advanced agentic capabilities
 ![Send Email](./db-image.png)
 
 
-![Save to neon databse](./email-iamge.png)
+![Save to neon databse](./email-image.png)
 
 
 ## 🛠️ Tech Stack

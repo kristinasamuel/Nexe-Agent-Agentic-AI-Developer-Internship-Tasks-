@@ -25,7 +25,6 @@ INTERMEDIATE:
  
 1. Multi-Tool Agent: 
 ❖ Web search 
-
 ❖ Save to DB 
 ❖ Send email 
  
@@ -48,11 +47,3 @@ ADVANCED:
 ❖ Separate Agents 
 ❖ Communication Layer 
 ❖ Task Delegation 
-
-what tech stsack i used 
-gemini appi key 
-openaisdk 
-fastapi 
-uv package manager
-next.js 
-tailwind 
