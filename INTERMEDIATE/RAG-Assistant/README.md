@@ -8,10 +8,13 @@ A professional Retrieval-Augmented Generation (RAG) assistant that provides cont
 - ✅ **SQL Memory:** Persistent chat history stored in **Neon PostgreSQL**.
 - ✅ **Contextual Answers:** AI agent uses Gemini models to answer questions using your specific file data.
 
+![RAG ASSISTANT](./rag-assistant.png)
+
 ## 🚀 Tech Stack
 - **Frontend:** Next.js (TypeScript), Tailwind CSS
 - **Backend:** FastAPI (Python), Uvicorn
 - **AI Engine:** Google Gemini Flash 
+
 - **Databases:** Qdrant (Vector) & Neon (SQL)
 
 *Kristina Agentic AI Developer*

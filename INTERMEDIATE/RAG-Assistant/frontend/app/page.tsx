@@ -271,7 +271,7 @@ export default function Home() {
             </button>
           </form>
           <p className="text-center text-xs text-gray-400 mt-4">
-            &copy; {new Date().getFullYear()} Developed by Agentic AI Developer Kristina
+            &copy; {new Date().getFullYear()} Developed by Agentic AI Engineer Kristina
           </p>
         </div>
       </main>
