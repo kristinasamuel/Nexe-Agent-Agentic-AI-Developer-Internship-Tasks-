@@ -28,7 +28,7 @@ export default function Home() {
   const chatEndRef = useRef<HTMLDivElement>(null);
   
   // Backend URL
-  const BACKEND_URL = "http://127.0.0.1:8000";
+  const BACKEND_URL = "https://kristinasamuel-multi-agent-system.hf.space";
 
   const scrollToBottom = () => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
